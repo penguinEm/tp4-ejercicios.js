@@ -21,6 +21,7 @@ p {
   font-size: 15px;
   font-weight: bolder;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: blue;
 }
 
 h3 {
@@ -29,7 +30,7 @@ h3 {
   font-family: sans-serif;
 }
 
-table,
-th, td{
+table  {
   border: 1px solid rgba(191, 31, 31, 0.701);
+  align-items: center;
 }
