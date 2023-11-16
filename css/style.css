@@ -1,0 +1,36 @@
+ol,
+li {
+  color: rgba(191, 31, 31, 0.701);
+  font-size: 30px;
+  font-family: sans-serif;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+h4 {
+  color:rgb(5, 152, 32);
+  font-size: 30px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+p {
+  font-size: 20px;
+  font-weight: bolder;
+  font-family: sans-serif;
+  color: rgba(0, 0, 255, 0.564);
+}
+
+h3 {
+  color: red;
+  font-size: 30px;
+  font-family: sans-serif;
+}
+
+table  {
+  border: 1px solid rgba(191, 31, 31, 0.701);
+  align-items: center;
+}
