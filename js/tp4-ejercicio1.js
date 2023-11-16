@@ -27,3 +27,4 @@ const auto = {
 auto.encender();
 document.write("<hr>");
 auto.apagar();
+
