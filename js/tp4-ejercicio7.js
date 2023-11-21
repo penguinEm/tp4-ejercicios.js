@@ -26,82 +26,113 @@ class Agenda {
     this.capacidad_maxima = 10;
   }
 
-  addContacto(nuevo_contacto, numero) {
+  addContacto(nombre, numero) {
     if (this.contacto.length < this.capacidad_maxima) {
-      this.contacto.push(nuevo_contacto, numero);
+      this.contacto.push([nombre, numero]);
+      alert(`Contacto "${nombre}" se agendo`);
     } else {
-      document.write(`No puede ingresar mas contactos exedio el limite "${this.capacidad_maxima}"`);
+      alert(`No puede ingresar mas contactos excedio el limite "${this.capacidad_maxima}"`);
     }
   }
 
-  contactoRepetido(nuevo_contacto) {
-    const repetido = this.contacto.includes(nuevo_contacto);
-    if (repetido === true) {
-      document.write(`El contacto ${nuevo_contacto} ya existe`);
+  contactoRepetido(nombre) {
+    const contactoRepetido = this.contacto.some((item) => item[0] === nombre);
+    if (contactoRepetido === true) {
+      alert(`El contacto "${nombre}" ya existe`);
     } else {
-      document.write(`NO existe, puedes agendar a ${nuevo_contacto} `);
+      alert(`No existe, puedes agendar a "${nombre}" `);
+    }
+  }
+
+  buscarContacto(nombre) {
+    const contacto_encontrado = this.contacto.find((item) => item[0] === nombre);
+
+    if (contacto_encontrado) {
+      alert(`El número de contacto para ${nombre} es: ${contacto_encontrado[1]}`);
+    } else {
+      alert(`No se encontró un contacto con el nombre ${nombre}.`);
     }
   }
 
   listarAgenda() {
-    if (this.contacto.length != 0) {
+    if (this.contacto.length !== 0) {
       document.write(`<h2> Lista de contactos </h2>
       <ul>`);
       for (let i = 0; i < this.contacto.length; i++) {
-        document.write(`<li>${this.contacto[i]}</li>`);
+        document.write(`<li>Nombre - Celular: ${this.contacto[i]}</li>`);
       }
       document.write(`</ul>`);
+    } else {
+      alert("La agenda esta vacía");
     }
   }
 
-  huecosLibres() {
+  espaciosLibres() {
     if (this.contacto.length === 10) {
-      document.write(`<h3>La AGENDA ESTA LLENA</h3>`);
+      alert(`La AGENDA ESTA LLENA`);
     } else {
-      const huecosLibres = 10 - this.contacto.length;
-      document.write(`<h2>La AGENDA tiene ${huecosLibres} espacios</h2>`);
+      const espaciosLibres = this.capacidad_maxima - this.contacto.length;
+      alert(`La AGENDA tiene "${espaciosLibres}" espacios`);
     }
   }
 }
 
 const agenda1 = new Agenda();
 
-let menuOpciones;
 do {
-  menuOpciones = prompt(`Ingrese el número de la opcion que va a ejecutar
+  let menu_opciones = prompt(`Ingrese el número de la opcion que va a ejecutar
   1. Añadir Contacto
   2. ¿Contacto repetido?
-  3. Listar Contacto
-  4. Ver huecos libres`);
-  switch (menuOpciones) {
-    case 1:
-      agenda1.addContacto();
+  3. Buscar un número
+  4. Listar Contacto
+  5. Ver huecos libres`);
+
+  switch (menu_opciones) {
+    case "1":
+      const nombre = prompt("Ingrese su nombre").toUpperCase();
+      const numero = parseInt(prompt("Ingrese su numero telefónico"));
+
+      if (!isNaN(nombre)) {
+        alert("Ingrese su nombre correctamente");
+      } else if (isNaN(numero)) {
+        alert("El numero ingresado es incorrecto");
+      } else {
+        agenda1.addContacto(nombre, numero);
+      }
+      console.log(agenda1);
       break;
 
-    case 2:
-      agenda1.contactoRepetido();
+    case "2":
+      const nombre_para_verificar = prompt(
+        "Ingrese el nombre del contacto que desea verificar si existe"
+      ).toUpperCase();
+      if (!isNaN(nombre_para_verificar)) {
+        alert("Ingrese un nombre válido para verificar");
+      } else {
+        agenda1.contactoRepetido(nombre_para_verificar);
+      }
       break;
 
-    case 3:
-      agenda1.contactoRepetido();
-      break;
+    case "3":
+      const numero_buscado = prompt(
+        `Ingrese el nombre del contacto que desea buscar`
+      ).toUpperCase();
+      if (!isNaN(numero_buscado)) {
+        alert("Ingrese un nombre válido para verificar");
+      } else {
+        agenda1.buscarContacto(numero_buscado);
+      }
 
-    case 4:
+    case "4":
       agenda1.listarAgenda();
       break;
 
-    case 5:
-      agenda1.huecosLibres();
+    case "5":
+      agenda1.espaciosLibres();
       break;
 
     default:
-      document.write(`Ingreso una opcion no válida`);
+      alert("Ingrese una opción válida");
       break;
   }
-} while (menuOpciones !== 6);
-
-
-
-
-
-
+} while (confirm("Desea realizar otra oepración"));
