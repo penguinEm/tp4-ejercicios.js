@@ -45,11 +45,12 @@ class Agenda {
   }
 
   buscarContacto(nombre) {
-    const buscarContacto = this.contacto.sime((item) => item[0] === nombre);
-    if (buscarContacto === true) {
-      alert(`El número de ${nombre[0]} es: ${nombre[1]}`);
+    const contacto_encontrado = this.contacto.find((item) => item[0] === nombre);
+
+    if (contacto_encontrado) {
+      alert(`El número de contacto para ${nombre} es: ${contacto_encontrado[1]}`);
     } else {
-      alert(`El contacto es inexistente`);
+      alert(`No se encontró un contacto con el nombre ${nombre}.`);
     }
   }
 
@@ -113,7 +114,9 @@ do {
       break;
 
     case "3":
-      const numero_buscado = prompt(`Ingrese el nombre del contacto que desea buscar`).toUpperCase;
+      const numero_buscado = prompt(
+        `Ingrese el nombre del contacto que desea buscar`
+      ).toUpperCase();
       if (!isNaN(numero_buscado)) {
         alert("Ingrese un nombre válido para verificar");
       } else {
